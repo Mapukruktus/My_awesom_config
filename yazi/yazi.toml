@@ -1,0 +1,20 @@
+# ~/.config/yazi/yazi.toml
+
+[opener]
+# Use "orphan = true" to ensure the player stays open after you close Yazi/Neovim
+edit = [
+{ run = 'nvim "$@"', block = true, desc = "Edit"
+},
+]
+play = [
+	{ run = 'mpv "$@"', orphan = true, desc = "Play with mpv", for = "unix" },
+	{ run = 'vlc "$@"', orphan = true, desc = "Play with VLC", for = "unix" },
+]
+
+[open]
+rules = [
+	# Map all video files to the "play" opener defined above
+	{ mime = "video/*", use = [ "play", "reveal" ] },
+	{ name = "*.txt", use = "edit" },
+	{ mime = "text/*", use = "edit" },
+]
