@@ -1,9 +1,0 @@
-[[manager.prepend_keymap]]
-on = "H"
-run = "shell 'ya emit open --split'"
-desc = "Open file in horizontal split"
-
-[[manager.prepend_keymap]]
-on = "L"
-run = "shell 'ya emit open --vsplit'"
-desc = "Open file in vertical split"
