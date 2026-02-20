@@ -6,6 +6,8 @@ return {
     lazy = false,
     config = function()
       require('catppuccin').setup {
+        no_italic = true,
+        no_bold = true,
         flavour = 'mocha', -- sets the specific flavor to Mocha
         transparent_background = false,
         term_colors = true,
@@ -38,7 +40,36 @@ return {
       vim.g.zenbones_italic = false
       vim.opt.signcolumn = 'no'
       vim.g.zenbones_darken_comments = 45
-      vim.cmd.colorscheme 'zenbones'
+      --vim.cmd.colorscheme 'zenbones'
     end,
   },
+  {
+    'bluz71/vim-moonfly-colors',
+    name = 'moonfly',
+    lazy = false,
+    priority = 1000,
+    -- config = function()
+    --   vim.g.moonflyTransparent = true
+    --   vim.g.moonflyNormalFloat = true
+    --   vim.cmd.colorscheme 'moonfly'
+    -- end,
+},
+ 
+  {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = true,      -- This is the master switch
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+    config = function(_, opts)
+      require("solarized-osaka").setup(opts)
+      vim.cmd.colorscheme("solarized-osaka")
+    end,
+ }, 
+
 }

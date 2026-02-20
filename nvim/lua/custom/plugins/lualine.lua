@@ -4,7 +4,7 @@ return {
   config = function()
     require('lualine').setup {
       options = {
-        theme = 'zenbones',
+        theme = 'solarized-osaka',
         -- CHANGE: Use sharp triangle separators
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },

@@ -1150,14 +1150,6 @@ require('lazy').setup({
 -- vim: ts=2 sts=2 sw=2 et
 --
 vim.keymap.del('n', 's')
--- After PlatformIO project is initialized, auto-generate compile_commands.json
-vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = 'platformio.ini',
-  callback = function()
-    vim.notify('PlatformIO initialized. Generating compile_commands.json...', vim.log.levels.INFO)
-    vim.fn.jobstart { 'pio', 'run', '-t', 'compiledb' }
-  end,
-})
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'c', 'cpp', 'h', 'hpp' },
   callback = function()
@@ -1188,3 +1180,31 @@ vim.keymap.set('n', '<leader>tc', ':tabclose<CR>')
 vim.keymap.set('n', '<leader>to', ':tabonly<CR>')
 vim.keymap.set('n', '<leader>tl', ':tabnext<CR>')
 vim.keymap.set('n', '<leader>th', ':tabprev<CR>')
+-- Function to clear bold and italic from all highlight groups
+local function clear_formatting()
+  local highlights = vim.api.nvim_get_hl(0, {})
+  for name, hl in pairs(highlights) do
+    local updated = false
+    if hl.bold then
+      hl.bold = false
+      updated = true
+    end
+    if hl.italic then
+      hl.italic = false
+      updated = true
+    end
+
+    if updated then
+      vim.api.nvim_set_hl(0, name, hl)
+    end
+  end
+end
+
+-- Run it whenever a colorscheme is applied
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = clear_formatting,
+})
+
+-- Run it now in case the colorscheme is already loaded
+clear_formatting()
+vim.opt.guicursor = 'a:block'
