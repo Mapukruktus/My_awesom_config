@@ -51,7 +51,7 @@ return {
   config = function()
     vim.g.pioConfig = {
       lsp = 'clangd', -- clangd | ccls
-      clangd_source = 'ccls', -- ccls | compiledb
+      clangd_source = 'compiledb', -- ccls | compiledb
       menu_key = '<leader>\\',
       debug = false,
     }
@@ -59,7 +59,7 @@ return {
     local pok, platformio = pcall(require, 'platformio')
     if pok then
       platformio.setup {
-        lsp = 'ccls', --default: ccls, other option: clangd
+        lsp = 'clangd', --default: ccls, other option: clangd
         -- If you pick clangd, it also creates compile_commands.json
 
         -- Uncomment out following line to enable platformio menu.

@@ -1,17 +1,23 @@
 return {
-  'nvim-telescope/telescope-media-files.nvim',
-  dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-  config = function()
-    require('telescope').setup {
-      extensions = {
-        media_files = {
-          -- filetypes whitelist
-          filetypes = { 'png', 'webp', 'jpg', 'jpeg' },
-          find_cmd = 'rg', -- ensure ripgrep is installed
-        },
+  '3rd/image.nvim',
+  enabled = false,
+  opts = {
+    dependencies = { 'luarocks.nvim' },
+    backend = 'kitty',
+    processor = 'magick_rock', -- or "magick" depending on your install
+    integrations = {
+      markdown = {
+        enabled = true,
+        clear_in_insert_mode = false,
+        download_remote_images = true,
+        only_render_image_at_cursor = false,
+        filetypes = { 'markdown', 'vimwiki', 'quarto' }, -- add quarto here!
       },
-    }
-    -- Load the extension
-    require('telescope').load_extension 'media_files'
-  end,
+    },
+    max_width = 100,
+    max_height = 12,
+    window_overlap_clear_enabled = true,
+    -- This is the important part for tmux:
+    tmux_passthrough_updated = true,
+  },
 }

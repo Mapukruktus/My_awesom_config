@@ -53,23 +53,23 @@ return {
     --   vim.g.moonflyNormalFloat = true
     --   vim.cmd.colorscheme 'moonfly'
     -- end,
-},
- 
+  },
+
   {
-    "craftzdog/solarized-osaka.nvim",
+    'craftzdog/solarized-osaka.nvim',
     lazy = false,
     priority = 1000,
     opts = {
-      transparent = true,      -- This is the master switch
+      transparent = false, -- This is the master switch
+      terminal_colors = true,
       styles = {
-        sidebars = "transparent",
-        floats = "transparent",
+        sidebars = 'transparent',
+        floats = 'transparent',
       },
     },
     config = function(_, opts)
-      require("solarized-osaka").setup(opts)
-      vim.cmd.colorscheme("solarized-osaka")
+      require('solarized-osaka').setup(opts)
+      vim.cmd.colorscheme 'solarized-osaka'
     end,
- }, 
-
+  },
 }
