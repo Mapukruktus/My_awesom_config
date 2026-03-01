@@ -60,7 +60,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      transparent = false, -- This is the master switch
+      transparent = true, -- This is the master switch
       terminal_colors = true,
       styles = {
         sidebars = 'transparent',
@@ -72,4 +72,16 @@ return {
       vim.cmd.colorscheme 'solarized-osaka'
     end,
   },
+}, -- lua/plugins/rose-pine.lua
+{
+  'rose-pine/neovim',
+  name = 'rose-pine',
+  opts = {
+    styles = {
+      transparentcy = true,
+    },
+  },
+  config = function()
+    vim.cmd 'colorscheme rose-pine'
+  end,
 }

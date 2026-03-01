@@ -123,10 +123,7 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
-
+vim.o.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -166,7 +163,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.o.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.o.cursorline = true
+vim.o.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
@@ -1110,7 +1107,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   --require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-  -- require 'kickstart.plugins.cursor_animation',
+  require 'kickstart.plugins.cursor_animation',
   require 'kickstart.plugins.colorscheme',
   require 'kickstart.plugins.editorconfig',
   require 'custom.plugins.devicons',
@@ -1206,36 +1203,36 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 -- Run it now in case the colorscheme is already loaded
-clear_formatting()
+-- clear_formatting()
 vim.opt.guicursor = 'a:block'
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'python', 'rust', 'go', 'cpp' },
-  callback = function()
-    vim.opt.colorcolumn = '80'
-  end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { 'python', 'rust', 'go', 'cpp' },
+--   callback = function()
+--     vim.opt.colorcolumn = '80'
+--   end,
+-- })
 
 local pyenv_path = '/home/thanachot/.pyenv/versions/nvim-env/bin/python'
 vim.g.python3_host_prog = pyenv_path
 
 --ipykernel keymaps
-vim.keymap.set('n', '<leader>mi', ':MoltenInit<CR>', { desc = 'Initialize Molten' })
-vim.keymap.set('n', '<leader>e', ':MoltenEvaluateLine<CR>', { desc = 'Execute line' })
-vim.keymap.set('v', '<leader>e', ':<C-u>MoltenEvaluateVisual<CR>', { desc = 'Execute visual selection' })
-vim.keymap.set('n', '<leader>rh', ':MoltenHideOutput<CR>', { desc = 'Hide output' })
-vim.keymap.set('n', '<leader>oh', ':MoltenNext<CR>', { desc = 'Show next output' })
-
-vim.keymap.set('n', '<leader>mi', function()
-  -- Try to find the name of the current pyenv/virtualenv
-  local venv = os.getenv 'PYENV_VERSION' or os.getenv 'VIRTUAL_ENV'
-
-  if venv then
-    -- Strip the path if it's a full path from VIRTUAL_ENV
-    local kernel_name = venv:match '([^/]+)$'
-    print('Initializing Molten with kernel: ' .. kernel_name)
-    vim.cmd('MoltenInit ' .. kernel_name)
-  else
-    -- Fallback to standard python3 if no env is active
-    vim.cmd 'MoltenInit python3'
-  end
-end, { desc = 'Initialize Molten (pyenv aware)' })
+-- vim.keymap.set('n', '<leader>mi', ':MoltenInit<CR>', { desc = 'Initialize Molten' })
+-- vim.keymap.set('n', '<leader>e', ':MoltenEvaluateLine<CR>', { desc = 'Execute line' })
+-- vim.keymap.set('v', '<leader>e', ':<C-u>MoltenEvaluateVisual<CR>', { desc = 'Execute visual selection' })
+-- vim.keymap.set('n', '<leader>rh', ':MoltenHideOutput<CR>', { desc = 'Hide output' })
+-- vim.keymap.set('n', '<leader>oh', ':MoltenNext<CR>', { desc = 'Show next output' })
+--
+-- vim.keymap.set('n', '<leader>mi', function()
+--   -- Try to find the name of the current pyenv/virtualenv
+--   local venv = os.getenv 'PYENV_VERSION' or os.getenv 'VIRTUAL_ENV'
+--
+--   if venv then
+--     -- Strip the path if it's a full path from VIRTUAL_ENV
+--     local kernel_name = venv:match '([^/]+)$'
+--     print('Initializing Molten with kernel: ' .. kernel_name)
+--     vim.cmd('MoltenInit ' .. kernel_name)
+--   else
+--     -- Fallback to standard python3 if no env is active
+--     vim.cmd 'MoltenInit python3'
+--   end
+-- end, { desc = 'Initialize Molten (pyenv aware)' })
