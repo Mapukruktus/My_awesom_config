@@ -1,222 +1,60 @@
--- Add this to the top of your init.lua
---[[int
-Error detected while processing /home/thanachot/.config/nvim/init.lua:
-E5113: Error while calling lua chunk: /home/thanachot/.config/nvim/init.lua:1067: attempt to
-call a table value
-stack traceback:
-        /home/thanachot/.config/nvim/init.lua:1067: in main chunk
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
-What is Kickstart?
-
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
-
-
-
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
-
-    (If you already know the Neovim basics, you can skip this step.)
-
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
-
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
-
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
-
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
-
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
-
-   NOTE: Look for lines like this
-
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
-
-If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now! :)
---]]
-
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 local vim = vim
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
---clean setup
--- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
-
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
--- Make line numbers default
 vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
 vim.o.relativenumber = true
-
--- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
-
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
-
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
+vim.o.showmode = true
 vim.o.clipboard = 'unnamedplus'
--- Enable break indent
 vim.o.breakindent = true
-
 -- Save undo history
 vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.o.signcolumn = 'yes'
-
+vim.opt.signcolumn = 'yes:2' -- Reserve 2 columns (try 3 if 2 is still overlapping)
 -- Decrease update time
-vim.o.updatetime = 250
-
+vim.o.updatetime = 50
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
 vim.opt.ttimeoutlen = 10
-
 -- Configure how new splits should be opened
 vim.o.splitright = true
 vim.o.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
---
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
-
 -- Show which line your cursor is on
 vim.o.cursorline = false
-
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.o.scrolloff = 8
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),cursor
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
-vim.o.confirm = true
+vim.o.confirm = false
 vim.opt.showtabline = 0
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
+vim.keymap.set('n', '<leader>e', function()
+  if vim.bo.filetype == 'oil' then
+    require('oil').close()
+  else
+    require('oil').open()
+  end
+end, { desc = 'Toggle Oil' })
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 -- Kaybinds to exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Escape to normal mode' })
--- This tells Neovim: "In Insert mode, a space is just a space. Don't wait."
--- Keybinds to make split navigation easier
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
---Open and exit the terminal keymaps
---
--- Save and close buffer without closing the split window
 vim.keymap.set('n', '<leader>bd', '<cmd>bp|bd #<cr>', { desc = 'Close Buffer; Keep Split' })
--- Close buffer immediately without saving (Force)
-vim.keymap.set('n', '<leader>bD', '<cmd>bd!<cr>', { desc = 'Force Close Buffer' })
---Close buffers keymaps
--- Open terminal in a Horizontal Split (bottom)
--- Function to open a NEW terminal in a specific split direction
 local function open_terminal(direction)
   -- 1. Get the directory of the current file BEFORE splitting
   local current_dir = vim.fn.expand '%:p:h'
@@ -242,6 +80,8 @@ local function open_terminal(direction)
   vim.cmd 'startinsert'
 end
 
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Keymaps
 vim.keymap.set('n', '<leader>th', function()
   open_terminal 'horizontal'
@@ -275,8 +115,6 @@ vim.api.nvim_create_autocmd('FileType', {
 --Splits
 vim.keymap.set('n', '<leader>v', ':vsplit<CR>', { desc = 'Split Vertical' })
 vim.keymap.set('n', '<leader>h', ':split<CR>', { desc = 'Split Horizontal' })
-vim.keymap.set('n', '<leader>x', ':close<CR>', { desc = 'Close current split' })
-vim.keymap.set('n', '<leader>o', ':only<CR>', { desc = 'Close all other splits' })
 -- Shift + l to go to the next buffer
 vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next buffer' })
 -- Move the current window like vim motions
@@ -284,27 +122,15 @@ vim.keymap.set('n', '<leader>wh', '<C-w>H', { desc = 'Move window far left' })
 vim.keymap.set('n', '<leader>wj', '<C-w>J', { desc = 'Move window far down' })
 vim.keymap.set('n', '<leader>wk', '<C-w>K', { desc = 'Move window far up' })
 vim.keymap.set('n', '<leader>wl', '<C-w>L', { desc = 'Move window far right' })
--- Resize splits with <leader>w + hjkl
-vim.keymap.set('n', '<leader>w>', ':vertical resize +5<CR>')
-vim.keymap.set('n', '<leader>w<', ':vertical lesize -5<CR>')
-vim.keymap.set('n', '<leader>w+', ':resize +2<CR>')
-vim.keymap.set('n', '<leader>w-', ':resize -2<CR>')
+-- Faster split resizing
+vim.keymap.set('n', '<M-left>', ':vertical resize -2<CR>')
+vim.keymap.set('n', '<M-right>', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<M-up>', ':resize -2<CR>')
+vim.keymap.set('n', '<M-down>', ':resize +2<CR>')
 
 -- Shift + h to go to the previous buffer
 vim.keymap.set('n', 'H', ':bprevious<CR>', { desc = 'Previous buffer' })
 
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -1050,17 +876,17 @@ require('lazy').setup({
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
+      -- local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- ---@diagnostic disable-next-line: duplicate-set-field
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
@@ -1202,37 +1028,22 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   callback = clear_formatting,
 })
 
--- Run it now in case the colorscheme is already loaded
--- clear_formatting()
+vim.opt.showmode = true
 vim.opt.guicursor = 'a:block'
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = { 'python', 'rust', 'go', 'cpp' },
---   callback = function()
---     vim.opt.colorcolumn = '80'
---   end,
--- })
 
-local pyenv_path = '/home/thanachot/.pyenv/versions/nvim-env/bin/python'
-vim.g.python3_host_prog = pyenv_path
-
---ipykernel keymaps
--- vim.keymap.set('n', '<leader>mi', ':MoltenInit<CR>', { desc = 'Initialize Molten' })
--- vim.keymap.set('n', '<leader>e', ':MoltenEvaluateLine<CR>', { desc = 'Execute line' })
--- vim.keymap.set('v', '<leader>e', ':<C-u>MoltenEvaluateVisual<CR>', { desc = 'Execute visual selection' })
--- vim.keymap.set('n', '<leader>rh', ':MoltenHideOutput<CR>', { desc = 'Hide output' })
--- vim.keymap.set('n', '<leader>oh', ':MoltenNext<CR>', { desc = 'Show next output' })
---
--- vim.keymap.set('n', '<leader>mi', function()
---   -- Try to find the name of the current pyenv/virtualenv
---   local venv = os.getenv 'PYENV_VERSION' or os.getenv 'VIRTUAL_ENV'
---
---   if venv then
---     -- Strip the path if it's a full path from VIRTUAL_ENV
---     local kernel_name = venv:match '([^/]+)$'
---     print('Initializing Molten with kernel: ' .. kernel_name)
---     vim.cmd('MoltenInit ' .. kernel_name)
---   else
---     -- Fallback to standard python3 if no env is active
---     vim.cmd 'MoltenInit python3'
---   end
--- end, { desc = 'Initialize Molten (pyenv aware)' })
+vim.opt.incsearch = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.keymap.set('n', 'J', "mzJ'z")
+vim.keymap.set('n', 'J', "mzJ'z")
+-- Remap half-page jumps to keep cursor centered
+vim.keymap.set('n', '<C-n>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+-- Also works for search jumping (n = next match)
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+--tmux sessionizer
+--Bind <C-f> to open tmux-sessionizer from within Neovim
+vim.keymap.set('n', '<C-f>', function()
+  vim.cmd 'silent !tmux neww /home/thanachot/.local/bin/tmux-sessionizer.bash'
+end)

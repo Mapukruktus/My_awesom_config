@@ -48,11 +48,11 @@ return {
     name = 'moonfly',
     lazy = false,
     priority = 1000,
-    -- config = function()
-    --   vim.g.moonflyTransparent = true
-    --   vim.g.moonflyNormalFloat = true
-    --   vim.cmd.colorscheme 'moonfly'
-    -- end,
+    config = function()
+      vim.g.moonflyTransparent = true
+      vim.g.moonflyNormalFloat = true
+      -- vim.cmd.colorscheme 'moonfly'
+    end,
   },
 
   {
@@ -69,19 +69,7 @@ return {
     },
     config = function(_, opts)
       require('solarized-osaka').setup(opts)
-      vim.cmd.colorscheme 'solarized-osaka'
+      -- vim.cmd.colorscheme 'solarized-osaka'
     end,
   },
-}, -- lua/plugins/rose-pine.lua
-{
-  'rose-pine/neovim',
-  name = 'rose-pine',
-  opts = {
-    styles = {
-      transparentcy = true,
-    },
-  },
-  config = function()
-    vim.cmd 'colorscheme rose-pine'
-  end,
 }
