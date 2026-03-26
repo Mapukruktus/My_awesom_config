@@ -94,24 +94,6 @@ vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]])
 vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
 vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
 vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'cpp',
-  callback = function()
-    vim.keymap.set('n', '<leader>r', function()
-      local file = vim.fn.expand '%' -- full file path
-      local dir = vim.fn.expand '%:p:h' -- directory of current file
-      local name = vim.fn.expand '%:t:r' -- filename without extension
-      local build_dir = dir .. '/build'
-      local output = build_dir .. '/' .. name
-
-      -- create build/ directory if it doesn't exist
-      vim.fn.mkdir(build_dir, 'p')
-
-      -- compile and run
-      vim.cmd('split | terminal g++ -std=c++20 -Wall ' .. file .. ' -o ' .. output .. ' && ' .. output)
-    end, { buffer = true, desc = 'Compile & run C++ (build/)' })
-  end,
-})
 --Splits
 vim.keymap.set('n', '<leader>v', ':vsplit<CR>', { desc = 'Split Vertical' })
 vim.keymap.set('n', '<leader>h', ':split<CR>', { desc = 'Split Horizontal' })
@@ -600,7 +582,6 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
-        gopls = {},
         pyright = {},
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -762,7 +743,7 @@ require('lazy').setup({
 
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<C-u>'] = { 'select_prev', 'fallback' },
         ['<C-n>'] = { 'select_next', 'fallback' },
 
         -- Bypass blink and leader-key wait for Space
@@ -971,10 +952,15 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
---
+vim.filetype.add {
+  extension = {
+    urdf = 'xml',
+    xacro = 'xml',
+  },
+}
 vim.keymap.del('n', 's')
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'cpp', 'h', 'hpp' },
+  pattern = { 'c', 'cpp', 'h', 'hpp', 'xml' },
   callback = function()
     vim.opt_local.expandtab = true -- use spaces instead of tabs
     vim.opt_local.shiftwidth = 2 -- indent size
