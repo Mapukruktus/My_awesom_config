@@ -1033,3 +1033,4 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '<C-f>', function()
   vim.cmd 'silent !tmux neww /home/thanachot/.local/bin/tmux-sessionizer.bash'
 end)
+vim.cmd 'colorscheme tokyonight-night'
