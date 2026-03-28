@@ -1,0 +1,16 @@
+#theme and font
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+theme = Catppuccin Mocha
+#window
+window-decoration = false
+window-width = 999
+window-height = 999
+window-padding-x = 10
+window-padding-y = 10 
+#cursor
+cursor-style-blink = false
+cursor-opacity = 1.0
+cursor-style = block
+
+mouse-hide-while-typing = true 
