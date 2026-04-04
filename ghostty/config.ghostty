@@ -1,7 +1,10 @@
 #theme and font
 font-family = "JetBrainsMono Nerd Font"
-font-size = 14
+font-size = 18
 theme = Catppuccin Mocha
+theme = Rose Pine Moon
+theme = 12-bit Rainbow
+fullscreen = true
 #window
 window-decoration = false
 window-width = 999
@@ -12,5 +15,8 @@ window-padding-y = 10
 cursor-style-blink = false
 cursor-opacity = 1.0
 cursor-style = block
+
+#blackground 
+background-opacity = 1
 
 mouse-hide-while-typing = true 
