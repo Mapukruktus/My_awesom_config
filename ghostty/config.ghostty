@@ -1,9 +1,7 @@
 #theme and font
 font-family = "JetBrainsMono Nerd Font"
-font-size = 18
-theme = Catppuccin Mocha
-theme = Rose Pine Moon
-theme = 12-bit Rainbow
+font-size = 22
+theme = Atom
 fullscreen = true
 #window
 window-decoration = false
