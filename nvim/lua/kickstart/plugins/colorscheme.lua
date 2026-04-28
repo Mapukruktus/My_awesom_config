@@ -9,7 +9,7 @@ return {
         no_italic = true,
         no_bold = true,
         flavour = 'mocha', -- sets the specific flavor to Mocha
-        transparent_background = false,
+        transparent_background = true,
         term_colors = true,
         integrations = {
           cmp = true,

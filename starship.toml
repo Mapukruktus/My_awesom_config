@@ -1,50 +1,65 @@
 # Reset layout
-add_newline = false
+add_newline = true
 format = """
 $directory\
 $git_branch\
-$git_status\
 $python\
-$character"""
+$line_break\
+$character
+"""
 
+[line_break]
+disabled = false
+#   (Octocat)
+#
+# 󰊤  (GitHub Logo)
+#
+#   (Classic Git Branch)
+#
+# 󰊢  (Git Logo)
+#
+# 󱓞  (Network nodes)
+#
+#   (Git Commit/Node)
+#
+# 󰘬  (Geometric Branch)
+#
+#   (Flaming/Action icon) 
+#
+#   (Python/Snake - surprisingly popular for git)
+#
+# 󱙨  (Ghost)
+#
+# 󰚌  (Rocket)
+#
+# 󰄛  (Cat head)
+#
+# 󱗆  (Ninja/Mask)
+#
+# 󰭦  (Satellite)
+#
+# 󿚭  (Alien)
+#
+# 󿓀  (Portal/Vortex)
+#
+# 󱗑  (Planet)
 [cmd_duration]
 disabled = true
 
-# 2. COLOR: Soft Lavender/Purple for the path (No Bold)
 [directory]
-style = "fg:#b4befe" # Catppuccin Lavender
+style = "fg:#b4befe" 
 format = "[$path]($style) "
 truncation_length = 1
-# truncation_symbol = "…/"
-
-# 3. GIT: Sleek icons with Mint & Rose colors
 [git_branch]
-symbol = " "
-style = "fg:#94e2d5" # Teal/Mint
-format = "on [$symbol$branch]($style) "
+symbol = " "
+style = "fg:#94e2d5" 
+format = "[$symbol\\[$branch\\]]($style) "
 
-[git_status]
-style = "fg:#f38ba8" # Soft Red
-# format = "([$all_status$ahead_behind]($style))"
-# conflicted = "󰞇 "
-# ahead = "⇡"
-# behind = "⇣"
-# diverged = "󰹹 "
-# up_to_date = "✔"
-untracked = "?"
-# stashed = "≡"
-modified = "!"
-# staged = "+"
-deleted = "✘"
-
-# 4. PYTHON: Gold/Amber (Perfect for ROS 2 nodes)
 [python]
 symbol = " "
 style = "fg:#f9e2af"
-format = "via [$symbol$venv]($style) "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
-# 5. CHARACTER: Minimal Green/Red (No Bold)
-#❯
 [character]
 success_symbol = "[❯](fg:#a6e3a1)" 
 error_symbol = "[❯](fg:#f38ba8)"

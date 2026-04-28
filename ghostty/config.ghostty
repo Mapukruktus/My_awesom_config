@@ -1,20 +1,21 @@
 #theme and font
 font-family = "JetBrainsMono Nerd Font"
-font-size = 22
+font-size = 16
 theme = Atom
 fullscreen = true
 #window
 window-decoration = false
 window-width = 999
 window-height = 999
-window-padding-x = 10
-window-padding-y = 10 
+window-padding-x = 5 
+window-padding-y = 0
 #cursor
 cursor-style-blink = false
 cursor-opacity = 1.0
 cursor-style = block
 
 #blackground 
-background-opacity = 1
+background-opacity = 0.9
 
 mouse-hide-while-typing = true 
+confirm-close-surface = false

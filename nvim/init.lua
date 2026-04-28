@@ -754,3 +754,12 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '<C-f>', function()
   vim.cmd 'silent !tmux neww /home/thanachot/.local/bin/tmux-sessionizer.bash'
 end)
+
+-- Merge the sign column (breakpoints) into the number column
+-- vim.opt.signcolumn = 'auto'
+
+-- Keep line numbers on so you have a place for the breakpoint to show up
+-- vim.opt.number = true
+
+-- Optional: Hide the ~ (tildes) so the empty space looks cleaner
+vim.opt.fillchars = { eob = ' ' }
