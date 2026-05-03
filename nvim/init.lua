@@ -644,7 +644,8 @@ require('lazy').setup({
           comments = { italic = false }, -- Disable italics in comments
         },
       }
-      vim.cmd 'colorscheme rose-pine-main'
+      -- vim.cmd 'colorscheme rose-pine-main'
+      vim.cmd 'colorscheme moonfly'
     end,
   },
 
