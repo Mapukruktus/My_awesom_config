@@ -1,7 +1,7 @@
 #theme and font
 font-family = "JetBrainsMono Nerd Font"
 font-size = 14
-theme = Atom
+theme = Adventure
 fullscreen = true
 #window
 window-decoration = false
@@ -15,7 +15,7 @@ cursor-opacity = 1.0
 cursor-style = block
 
 #blackground 
-background-opacity = 0.9
+background-opacity = 1
 
 mouse-hide-while-typing = true 
 confirm-close-surface = false

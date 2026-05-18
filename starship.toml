@@ -10,39 +10,6 @@ $character
 
 [line_break]
 disabled = false
-#   (Octocat)
-#
-# 󰊤  (GitHub Logo)
-#
-#   (Classic Git Branch)
-#
-# 󰊢  (Git Logo)
-#
-# 󱓞  (Network nodes)
-#
-#   (Git Commit/Node)
-#
-# 󰘬  (Geometric Branch)
-#
-#   (Flaming/Action icon) 
-#
-#   (Python/Snake - surprisingly popular for git)
-#
-# 󱙨  (Ghost)
-#
-# 󰚌  (Rocket)
-#
-# 󰄛  (Cat head)
-#
-# 󱗆  (Ninja/Mask)
-#
-# 󰭦  (Satellite)
-#
-# 󿚭  (Alien)
-#
-# 󿓀  (Portal/Vortex)
-#
-# 󱗑  (Planet)
 [cmd_duration]
 disabled = true
 

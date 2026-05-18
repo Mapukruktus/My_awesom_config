@@ -111,6 +111,7 @@ require('lazy').setup({
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    enabled = false,
     opts = {
       delay = 0,
       icons = {
@@ -444,9 +445,9 @@ require('lazy').setup({
           format = function(diagnostic)
             local diagnostic_message = {
               [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
+              -- [vim.diagnostic.severity.WARN] = diagnostic.message,
+              -- [vim.diagnostic.severity.INFO] = diagnostic.message,
+              -- [vim.diagnostic.severity.HINT] = diagnostic.message,
             }
             return diagnostic_message[diagnostic.severity]
           end,
@@ -644,8 +645,6 @@ require('lazy').setup({
           comments = { italic = false }, -- Disable italics in comments
         },
       }
-      -- vim.cmd 'colorscheme rose-pine-main'
-      vim.cmd 'colorscheme moonfly'
     end,
   },
 
@@ -695,7 +694,6 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'kickstart.plugins.cursor_animation',
-  require 'kickstart.plugins.colorscheme',
   require 'kickstart.plugins.editorconfig',
   require 'custom.plugins.devicons',
   { import = 'custom.plugins' },
@@ -756,11 +754,8 @@ vim.keymap.set('n', '<C-f>', function()
   vim.cmd 'silent !tmux neww /home/thanachot/.local/bin/tmux-sessionizer.bash'
 end)
 
--- Merge the sign column (breakpoints) into the number column
--- vim.opt.signcolumn = 'auto'
-
--- Keep line numbers on so you have a place for the breakpoint to show up
--- vim.opt.number = true
-
--- Optional: Hide the ~ (tildes) so the empty space looks cleaner
 vim.opt.fillchars = { eob = ' ' }
+vim.keymap.set('n', '<leader>c', function()
+  Snacks.picker.colorschemes()
+end, { desc = '[T]heme switcher [H]ighlight (Snacks)' })
+vim.cmd.colorscheme 'catppuccin'
