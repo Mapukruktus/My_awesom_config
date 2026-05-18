@@ -8,7 +8,6 @@ vim.o.mouse = 'a'
 vim.o.showmode = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
--- Save undo history
 vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -748,12 +747,6 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 -- Also works for search jumping (n = next match)
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
---tmux sessionizer
---Bind <C-f> to open tmux-sessionizer from within Neovim
-vim.keymap.set('n', '<C-f>', function()
-  vim.cmd 'silent !tmux neww /home/thanachot/.local/bin/tmux-sessionizer.bash'
-end)
-
 vim.opt.fillchars = { eob = ' ' }
 vim.keymap.set('n', '<leader>c', function()
   Snacks.picker.colorschemes()
