@@ -17,10 +17,11 @@ disabled = true
 style = "fg:#b4befe" 
 format = "[$path]($style) "
 truncation_length = 1
+
 [git_branch]
 symbol = " "
-style = "fg:#94e2d5" 
-format = "[$symbol\\[$branch\\]]($style) "
+style = "fg:#f38ba8" 
+format = "$symbol[\\[$branch\\]]($style) "
 
 [python]
 symbol = " "

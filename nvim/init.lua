@@ -1,23 +1,21 @@
 local vim = vim
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.o.modeline = false
 vim.g.have_nerd_font = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = 'a'
-vim.o.showmode = true
+vim.o.showmode = false -- Performance: Disable mode display in command line
 vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.opt.signcolumn = 'yes:2' -- Reserve 2 columns (try 3 if 2 is still overlapping)
--- Decrease update time
-vim.o.updatetime = 50
--- Decrease mapped sequence wait time
+vim.opt.signcolumn = 'no'
+vim.o.updatetime = 250 -- Performance: Increase updatetime to reduce disk writes/autocmd triggers
 vim.o.timeoutlen = 300
-vim.opt.ttimeoutlen = 10
--- Configure how new splits should be opened
+vim.opt.ttimeoutlen = 0 -- Performance: Set to 0 for instant mode switching
 vim.o.splitright = true
 vim.o.splitbelow = true
 -- Preview substitutions live, as you type!
@@ -28,6 +26,9 @@ vim.o.cursorline = false
 vim.o.scrolloff = 8
 vim.o.confirm = false
 vim.opt.showtabline = 0
+-- vim.opt.laststatus = 0 -- Request: Disable statusline for cleaner workspace
+vim.opt.ch = 0 -- Performance: Hide command line when not in use
+vim.opt.lazyredraw = true -- Performance: Don't redraw during macros/non-interactive ops
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>e', function()
   if vim.bo.filetype == 'oil' then
@@ -85,16 +86,16 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require('lazy').setup({
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-  {
-    'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup {
-        default = true,
-        strict = true,
-      }
-    end,
-  },
+  -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  -- {
+  --   'nvim-tree/nvim-web-devicons',
+  --   config = function()
+  --     require('nvim-web-devicons').setup {
+  --       default = true,
+  --       strict = true,
+  --     }
+  --   end,
+  -- },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -433,9 +434,9 @@ require('lazy').setup({
         signs = vim.g.have_nerd_font and {
           text = {
             [vim.diagnostic.severity.ERROR] = '󰅚 ',
-            [vim.diagnostic.severity.WARN] = '󰀪 ',
-            [vim.diagnostic.severity.INFO] = '󰋽 ',
-            [vim.diagnostic.severity.HINT] = '󰌶 ',
+            --        [vim.diagnostic.severity.INFO] = '󰋽 ',
+            -- [vim.diagnostic.severity.warn] = '󰀪 ',
+            --        [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
         virtual_text = {
@@ -453,10 +454,6 @@ require('lazy').setup({
         },
       }
 
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local servers = {
         clangd = {},
@@ -530,10 +527,14 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        -- Add Web Dev tools here to format your Astro projects seamlessly
+        astro = { 'prettierd', 'prettier', stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        css = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -628,23 +629,6 @@ require('lazy').setup({
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
-  },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-    end,
   },
 
   -- Highlight todo, notes, etc in comments
@@ -748,7 +732,21 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.opt.fillchars = { eob = ' ' }
+vim.opt.ruler = false -- Hide line/column position
+vim.opt.showcmd = true -- Hide last command
+vim.opt.laststatus = 2
 vim.keymap.set('n', '<leader>c', function()
   Snacks.picker.colorschemes()
 end, { desc = '[T]heme switcher [H]ighlight (Snacks)' })
-vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme 'catppuccin-mocha'
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp', 'h', 'hpp', 'xml', 'astro', 'html', 'css', 'javascript' },
+  callback = function()
+    vim.opt_local.expandtab = true -- use spaces instead of tabs
+    vim.opt_local.shiftwidth = 2 -- indent size
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.smartindent = true
+  end,
+})

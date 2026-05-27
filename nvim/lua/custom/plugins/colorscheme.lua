@@ -29,8 +29,6 @@ return {
         transparent_background = true, -- This disables the main background fill
         integrations = {
           cmp = true,
-          gitsigns = true,
-          nvimtree = true,
           treesitter = true,
           notify = true,
           mini = {
@@ -75,6 +73,22 @@ return {
     end,
   },
 
+  -- Tokyo Night
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('tokyonight').setup {
+        transparent = true,
+        styles = {
+          sidebars = 'transparent',
+          floats = 'transparent',
+        },
+      }
+    end,
+  },
+
   -- Solarized Osaka
   {
     'craftzdog/solarized-osaka.nvim',
@@ -90,6 +104,107 @@ return {
     },
     config = function(_, opts)
       require('solarized-osaka').setup(opts)
+    end,
+  },
+
+  -- Kanagawa
+  {
+    'rebelot/kanagawa.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('kanagawa').setup {
+        transparent = true,
+        theme = 'wave', -- Load "wave" theme by default
+        background = {
+          dark = 'wave',
+          light = 'lotus',
+        },
+      }
+    end,
+  },
+
+  -- Everforest
+  {
+    'sainnhe/everforest',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.everforest_background = 'soft'
+      vim.g.everforest_transparent_background = 1
+    end,
+  },
+
+  -- Gruvbox Material
+  {
+    'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_background = 'soft'
+      vim.g.gruvbox_material_foreground = 'material'
+      vim.g.gruvbox_material_transparent_background = 1
+    end,
+  },
+
+  -- Nightfox
+  {
+    'EdenEast/nightfox.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('nightfox').setup {
+        options = {
+          transparent = true,
+        },
+      }
+    end,
+  },
+
+  -- Nordic
+  {
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('nordic').setup {
+        -- transparent_bg = true,
+      }
+    end,
+  },
+
+  -- Oxocarbon
+  {
+    'nyoom-engineering/oxocarbon.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.opt.background = 'dark'
+    end,
+  },
+
+  -- Night Owl
+  {
+    'oxfist/night-owl.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('night-owl').setup {
+        transparent_background = true,
+      }
+    end,
+  },
+
+  -- Dracula
+  {
+    'Mofiqul/dracula.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('dracula').setup {
+        j,
+        -- transparent_bg = true,
+      }
     end,
   },
 }

@@ -1,7 +1,6 @@
-#theme and font
 font-family = "JetBrainsMono Nerd Font"
 font-size = 14
-theme = Adventure
+theme = Dracula
 fullscreen = true
 #window
 window-decoration = false
