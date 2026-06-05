@@ -3,8 +3,8 @@ return {
   {
     'rose-pine/neovim',
     name = 'rose-pine',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('rose-pine').setup {
         variant = 'auto',
@@ -22,11 +22,11 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    lazy = false, -- Added this to ensure it loads on startup alongside your active theme
-    priority = 1000,
+    lazy = true, -- Added this to ensure it loads on startup alongside your active theme
+    
     config = function()
       require('catppuccin').setup {
-        transparent_background = true, -- This disables the main background fill
+        -- transparent_background = true, -- This disables the main background fill
         integrations = {
           cmp = true,
           treesitter = true,
@@ -52,8 +52,8 @@ return {
   {
     'zenbones-theme/zenbones.nvim',
     dependencies = 'rktjmp/lush.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       vim.g.zenbones_italic = false
       vim.opt.signcolumn = 'no'
@@ -65,8 +65,8 @@ return {
   {
     'bluz71/vim-moonfly-colors',
     name = 'moonfly',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       vim.g.moonflyTransparent = true
       vim.g.moonflyNormalFloat = true
@@ -76,8 +76,8 @@ return {
   -- Tokyo Night
   {
     'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('tokyonight').setup {
         transparent = true,
@@ -92,8 +92,8 @@ return {
   -- Solarized Osaka
   {
     'craftzdog/solarized-osaka.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     opts = {
       transparent = true,
       terminal_colors = true,
@@ -110,8 +110,8 @@ return {
   -- Kanagawa
   {
     'rebelot/kanagawa.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('kanagawa').setup {
         transparent = true,
@@ -127,8 +127,8 @@ return {
   -- Everforest
   {
     'sainnhe/everforest',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       vim.g.everforest_background = 'soft'
       vim.g.everforest_transparent_background = 1
@@ -138,8 +138,8 @@ return {
   -- Gruvbox Material
   {
     'sainnhe/gruvbox-material',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       vim.g.gruvbox_material_background = 'soft'
       vim.g.gruvbox_material_foreground = 'material'
@@ -150,8 +150,8 @@ return {
   -- Nightfox
   {
     'EdenEast/nightfox.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('nightfox').setup {
         options = {
@@ -164,8 +164,8 @@ return {
   -- Nordic
   {
     'AlexvZyl/nordic.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('nordic').setup {
         -- transparent_bg = true,
@@ -176,8 +176,8 @@ return {
   -- Oxocarbon
   {
     'nyoom-engineering/oxocarbon.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       vim.opt.background = 'dark'
     end,
@@ -186,8 +186,8 @@ return {
   -- Night Owl
   {
     'oxfist/night-owl.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('night-owl').setup {
         transparent_background = true,
@@ -195,11 +195,75 @@ return {
     end,
   },
 
+  -- Nord
+  {
+    'shaunsingh/nord.nvim',
+    lazy = false, priority = 1000,
+    
+    config = function()
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = false
+      vim.g.nord_italic = false
+      vim.g.nord_uniform_diff_background = true
+      vim.g.nord_bold = false
+
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        group = vim.api.nvim_create_augroup('nord_custom', { clear = true }),
+        pattern = 'nord',
+        callback = function()
+          local bg = '#2e3440'
+          local bg_alt = '#3b4252'
+          local bg_pop = '#434c5e'
+
+          vim.api.nvim_set_hl(0, 'Normal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'NormalNC', { bg = bg })
+          vim.api.nvim_set_hl(0, 'SignColumn', { bg = bg })
+          vim.api.nvim_set_hl(0, 'LineNr', { bg = bg })
+          vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = bg })
+          vim.api.nvim_set_hl(0, 'NormalFloat', { bg = bg })
+          vim.api.nvim_set_hl(0, 'FloatBorder', { bg = bg })
+
+          vim.api.nvim_set_hl(0, 'Pmenu', { bg = bg_alt })
+          vim.api.nvim_set_hl(0, 'PmenuSel', { bg = bg_pop })
+          vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = bg_alt })
+          vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = bg_pop })
+
+          vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = bg })
+          vim.api.nvim_set_hl(0, 'TelescopeTitle', { bg = bg_alt })
+          vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { bg = bg_alt })
+          vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { bg = bg_alt })
+          vim.api.nvim_set_hl(0, 'TelescopeResultsNormal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { bg = bg })
+          vim.api.nvim_set_hl(0, 'TelescopePreviewNormal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { bg = bg })
+          vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = bg_alt })
+
+          vim.api.nvim_set_hl(0, 'SnacksDashboard', { bg = bg })
+          vim.api.nvim_set_hl(0, 'SnacksDashboardDesc', { fg = '#88c0d0' })
+          vim.api.nvim_set_hl(0, 'SnacksDashboardKey', { fg = '#a3be8c' })
+          vim.api.nvim_set_hl(0, 'SnacksPicker', { bg = bg })
+          vim.api.nvim_set_hl(0, 'SnacksPickerBorder', { bg = bg })
+
+          vim.api.nvim_set_hl(0, 'StatusLine', { bg = bg_alt })
+          vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = bg })
+          vim.api.nvim_set_hl(0, 'WinSeparator', { bg = bg })
+
+          vim.api.nvim_set_hl(0, 'LazyNormal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'MasonNormal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'WhichKeyNormal', { bg = bg })
+          vim.api.nvim_set_hl(0, 'WhichKeyBorder', { bg = bg })
+          vim.api.nvim_set_hl(0, 'OilNormal', { bg = bg })
+        end,
+      })
+    end,
+  },
+
   -- Dracula
   {
     'Mofiqul/dracula.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    
     config = function()
       require('dracula').setup {
         j,

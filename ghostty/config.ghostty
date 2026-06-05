@@ -1,20 +1,20 @@
-font-family = "JetBrainsMono Nerd Font"
-font-size = 14
-theme = Dracula
-fullscreen = true
-#window
+font-family = "Fira Code"
+font-size = 20
+theme = Nord
+
+# window
 window-decoration = false
 window-width = 999
 window-height = 999
-window-padding-x = 5 
-window-padding-y = 0
-#cursor
-cursor-style-blink = false
-cursor-opacity = 1.0
-cursor-style = block
+window-padding-x = 8
+window-padding-y = 4
 
-#blackground 
+cursor-style = block 
+cursor-style-blink = false
+
+# background
 background-opacity = 1
 
-mouse-hide-while-typing = true 
+# performance
+mouse-hide-while-typing = true
 confirm-close-surface = false
