@@ -1,9 +1,7 @@
--- Load core settings
 require('core.options')
 require('core.keymaps')
 require('core.autocmds')
 
--- Lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -11,7 +9,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Plugins
 require('lazy').setup({
   { import = 'plugins' },
 }, {
@@ -24,6 +21,5 @@ require('lazy').setup({
   },
 })
 
--- Final setup
 vim.filetype.add { extension = { urdf = 'xml', xacro = 'xml' } }
 vim.cmd.colorscheme 'nord'

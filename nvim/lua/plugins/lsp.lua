@@ -80,18 +80,12 @@ return {
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
         underline = { severity = vim.diagnostic.severity.ERROR },
-        signs = vim.g.have_nerd_font and {
-          text = {
-            [vim.diagnostic.severity.ERROR] = '󰅚 ',
-          },
-        } or {},
+        signs = vim.g.have_nerd_font and { text = { [vim.diagnostic.severity.ERROR] = '󰅚 ' } } or {},
         virtual_text = {
           source = 'if_many',
           spacing = 2,
           format = function(diagnostic)
-            if diagnostic.severity == vim.diagnostic.severity.ERROR then
-              return diagnostic.message
-            end
+            if diagnostic.severity == vim.diagnostic.severity.ERROR then return diagnostic.message end
           end,
         },
       }
@@ -101,13 +95,7 @@ return {
         clangd = {},
         pyright = {},
         rust_analyzer = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              completion = { callSnippet = 'Replace' },
-            },
-          },
-        },
+        lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})

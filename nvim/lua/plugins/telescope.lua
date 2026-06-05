@@ -6,9 +6,7 @@ return {
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end,
+      cond = function() return vim.fn.executable 'make' == 1 end,
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
@@ -16,9 +14,7 @@ return {
   config = function()
     require('telescope').setup {
       extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
-        },
+        ['ui-select'] = { require('telescope.themes').get_dropdown() },
       },
     }
 
@@ -45,10 +41,7 @@ return {
     end, { desc = '[/] Fuzzily search in current buffer' })
 
     vim.keymap.set('n', '<leader>s/', function()
-      builtin.live_grep {
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      }
+      builtin.live_grep { grep_open_files = true, prompt_title = 'Live Grep in Open Files' }
     end, { desc = '[S]earch [/] in Open Files' })
 
     vim.keymap.set('n', '<leader>sn', function()
