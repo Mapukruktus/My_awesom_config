@@ -85,7 +85,9 @@ return {
           source = 'if_many',
           spacing = 2,
           format = function(diagnostic)
-            if diagnostic.severity == vim.diagnostic.severity.ERROR then return diagnostic.message end
+            if diagnostic.severity == vim.diagnostic.severity.ERROR then
+              return diagnostic.message
+            end
           end,
         },
       }
@@ -95,6 +97,7 @@ return {
         clangd = {},
         pyright = {},
         rust_analyzer = {},
+        neocmake = {},
         lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },
       }
 

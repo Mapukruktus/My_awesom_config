@@ -1,6 +1,12 @@
 local map = vim.keymap.set
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
-map('n', '<leader>e', function() if vim.bo.filetype == 'oil' then require('oil').close() else require('oil').open() end end, { desc = 'Toggle Oil' })
+map('n', '<leader>e', function()
+  if vim.bo.filetype == 'oil' then
+    require('oil').close()
+  else
+    require('oil').open()
+  end
+end, { desc = 'Toggle Oil' })
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 map('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 map('i', 'jk', '<Esc>', { desc = 'Escape to normal mode' })
@@ -30,5 +36,11 @@ map('n', '<C-n>', '<C-d>zz')
 map('n', '<C-u>', '<C-u>zz')
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
-map('n', '<leader>c', function() Snacks.picker.colorschemes() end, { desc = '[T]heme switcher' })
-map('n', '<leader>u', function() require('undotree').toggle() end, { desc = 'Toggle Undotree' })
+map('n', '<leader>fg', '<cmd>Telescope git_files<cr>', { desc = 'Find Git Files' })
+
+map('n', '<leader>c', function()
+  Snacks.picker.colorschemes()
+end, { desc = '[T]heme switcher' })
+map('n', '<leader>u', function()
+  require('undotree').toggle()
+end, { desc = 'Toggle Undotree' })
