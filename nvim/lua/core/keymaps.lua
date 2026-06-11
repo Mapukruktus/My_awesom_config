@@ -39,8 +39,8 @@ map('n', 'N', 'Nzzzv')
 map('n', '<leader>fg', '<cmd>Telescope git_files<cr>', { desc = 'Find Git Files' })
 
 map('n', '<leader>c', function()
-  Snacks.picker.colorschemes()
-end, { desc = '[T]heme switcher' })
+  require('telescope.builtin').colorscheme { enable_preview = true }
+end, { desc = '[C]olorscheme picker' })
 map('n', '<leader>u', function()
   require('undotree').toggle()
 end, { desc = 'Toggle Undotree' })
