@@ -110,6 +110,7 @@ return {
       vim.g.nord_bold = false
       vim.g.nord_italic = false
       vim.g.nord_italic_comments = false
+      vim.g.nord_disable_background = false
     end,
   },
   {

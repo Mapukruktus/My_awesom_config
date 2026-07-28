@@ -94,8 +94,8 @@ return {
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local servers = {
-        clangd = {},
-        pyright = {},
+        clangd = { cmd = { 'clangd', '--header-insertion=never' } },
+        pyright = { settings = { pyright = { autoImportCompletions = false } } },
         rust_analyzer = {},
         neocmake = {},
         lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace' } } } },

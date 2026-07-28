@@ -48,6 +48,14 @@ return {
     sources = {
       default = { 'lsp', 'path', 'snippets', 'lazydev' },
       providers = {
+        lsp = {
+          transform_items = function(_, items)
+            for _, item in ipairs(items) do
+              item.additionalTextEdits = nil
+            end
+            return items
+          end,
+        },
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
       },
     },
