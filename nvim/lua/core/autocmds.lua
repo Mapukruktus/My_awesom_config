@@ -1,6 +1,8 @@
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function() vim.hl.on_yank() end,
+  callback = function()
+    vim.hl.on_yank()
+  end,
 })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'c', 'cpp', 'h', 'hpp', 'xml', 'astro', 'html', 'css', 'javascript' },

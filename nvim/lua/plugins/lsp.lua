@@ -69,6 +69,7 @@ return {
           end
 
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+            vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
@@ -79,17 +80,17 @@ return {
       vim.diagnostic.config {
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
-        signs = vim.g.have_nerd_font and { text = { [vim.diagnostic.severity.ERROR] = '󰅚 ' } } or {},
-        virtual_text = {
-          source = 'if_many',
-          spacing = 2,
-          format = function(diagnostic)
-            if diagnostic.severity == vim.diagnostic.severity.ERROR then
-              return diagnostic.message
-            end
-          end,
-        },
+        underline = false,
+        signs = false,
+        -- virtual_text = {
+        --   source = 'if_many',
+        --   spacing = 2,
+        --   format = function(diagnostic)
+        --     if diagnostic.severity == vim.diagnostic.severity.ERROR then
+        --       return diagnostic.message
+        --     end
+        --   end,
+        -- },
       }
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()

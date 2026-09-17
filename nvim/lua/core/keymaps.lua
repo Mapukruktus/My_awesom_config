@@ -39,6 +39,7 @@ map('n', 'N', 'Nzzzv')
 map('n', '<leader>fg', '<cmd>Telescope git_files<cr>', { desc = 'Find Git Files' })
 -- vim.keymap.set({ 'n', 'v' }, 'H', '^', { desc = 'Go to start of line' })
 -- vim.keymap.set({ 'n', 'v' }, 'L', '$', { desc = 'Go to end of line' })
+map('n', '<leader>kn', '<cmd>RemoteSSHFSConnect<cr>')
 
 map('n', '<leader>c', function()
   require('telescope.builtin').colorscheme { enable_preview = true }
@@ -46,3 +47,4 @@ end, { desc = '[C]olorscheme picker' })
 map('n', '<leader>u', function()
   require('undotree').toggle()
 end, { desc = 'Toggle Undotree' })
+map('n', ';', '%', { desc = 'Jump to matching bracket/string' })

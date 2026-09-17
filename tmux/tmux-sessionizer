@@ -3,7 +3,7 @@
 # tmux-sessionizer — switch to or create tmux sessions via fzf
 
 SEARCH_DIRS=(
-  ~/code ~/projects ~/work ~/personal ~/school ~/lab ~/notes ~/dotfiles ~/github
+  "$HOME"
 )
 
 session_name() {
@@ -16,11 +16,20 @@ session_name() {
 has_session() { tmux has-session -t "$1" 2>/dev/null; }
 
 find_dirs() {
-  # Use zoxide if available for smarter results
   if command -v zoxide &>/dev/null; then
     zoxide query -l 2>/dev/null
   fi
-  find "${SEARCH_DIRS[@]}" -mindepth 1 -maxdepth 3 -type d 2>/dev/null
+  find "${SEARCH_DIRS[@]}" -mindepth 1 -maxdepth 4 -type d \
+    -not -path '*/\..*' \
+    -not -path '*/node_modules/*' \
+    -not -path '*/target/*' \
+    -not -path '*/\.cache/*' \
+    -not -path '*/\.local/*' \
+    -not -path '*/\.config/*' \
+    -not -path '*/snap/*' \
+    -not -path '*/.venv/*' \
+    -not -path '*/__pycache__/*' \
+    2>/dev/null
 }
 
 fzf_preview() {
