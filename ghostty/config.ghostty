@@ -1,8 +1,9 @@
 font-family = "Fira Code"
 font-size = 16
-theme = Nord
+theme = Kanagawa Wave
 
 # window
+maximize = true
 window-decoration = false
 window-width = 999
 window-height = 999
