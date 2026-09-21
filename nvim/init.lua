@@ -32,4 +32,4 @@ require('lazy').setup({
 })
 
 vim.filetype.add { extension = { urdf = 'xml', xacro = 'xml' } }
-vim.cmd.colorscheme 'rose-pine-moon'
+vim.cmd.colorscheme 'kanagawa'

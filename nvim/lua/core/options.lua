@@ -3,8 +3,8 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 local opt = vim.opt
-opt.number = true
-opt.relativenumber = true
+-- opt.number = true
+-- opt.relativenumber = true
 opt.mouse = 'a'
 opt.showmode = true
 opt.clipboard = 'unnamedplus'
